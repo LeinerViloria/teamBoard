@@ -11,11 +11,11 @@ const register = async (req, res) => {
 
     if(!existingUser) return res.status(400).send({msg:"User not found"});
 
-    const userId = existingUser._id;
+    const thisuserId = existingUser._id;
     const toDoStatus = "to-do";
 
     const schema = new task({
-        user:userId,
+        userId:thisuserId,
         name:req.body.name,
         description:req.body.description,
         taskStatus:toDoStatus
