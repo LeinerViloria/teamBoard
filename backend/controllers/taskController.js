@@ -7,7 +7,7 @@ const register = async (req, res) => {
     if(!req.body.userEmail || !req.body.name || !req.body.description) return res.status(400).send({msg:"Incomplete data"});
 
     //Saber si el usuario existe, a través del correo
-    const existingUser = await user.find({$and:[{email:req.body.userEmail}, {dbStatus:"true"}]});
+    const existingUser = await user.findOne({$and:[{email:req.body.userEmail}, {dbStatus:"true"}]});
 
     if(!existingUser) return res.status(400).send({msg:"User not found"});
 
@@ -78,7 +78,7 @@ const listAllByStatus = async (req, res) => {
 
 const listTaskByUser = async (req, res) => {
 
-    const thisUser = await user.find({$and:[{email:req.params["email"]}, {dbStatus:"true"}]});
+    const thisUser = await user.findOne({$and:[{email:req.params["email"]}, {dbStatus:"true"}]});
 
     if(!thisUser) return res.status(400).send({msg:"User not found"});
 
